@@ -1,26 +1,35 @@
-# Write a program to generate a QR code based on user input, such as text or a
-# URL. The QR code should be saved as an image file that can be scanned with a
-# smartphone.
-
 import qrcode
 
-def userInput():
-
-    data=input("enter the data or link : ")
-    fill_color = input(" the color of the qr : ")
-    back_color = input("the background color of qr : ")
+def userInput( ):
+    
+    data= input("enter the data or link : ").lower()
+    fill_color= input(" the color of the qr : ").lower()
+    back_color= input("the background color of qr : ").lower()
     return data,fill_color,back_color
 
 
 def qrCodeGenerator():
-    data,fill_color,back_color= userInput()
+    try:
+        n=int(input("how many qr would u like to generate : "))
+    except ValueError:
+        print("enter valid number ")
 
-    qr = qrcode.QRCode()
+    for i in range(n):
+            print(f"for qr no {i+1}")
+            try:
 
-    qr.add_data(data)
-    qr.make(fit=True)
-    image = qr.make_image(fill_color= fill_color, back_color=back_color)
-    image.save("qr.png")
+                data,fill_color,back_color=userInput()
+
+                qr = qrcode.QRCode()
+
+                qr.add_data(data)
+                qr.make(fit=True)
+                image = qr.make_image(fill_color= fill_color, back_color=back_color)
+                image.save(f"qr{i+1}.png")
+
+            except ValueError:
+                 print("invalid color ")
+        
 
 qrCodeGenerator()
 
