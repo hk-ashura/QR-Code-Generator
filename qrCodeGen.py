@@ -4,11 +4,22 @@
 
 import qrcode
 
+def userInput():
+
+    data=input("enter the data or link : ")
+    fill_color = input(" the color of the qr : ")
+    back_color = input("the background color of qr : ")
+    return data,fill_color,back_color
+
+
 def qrCodeGenerator():
+    data,fill_color,back_color= userInput()
 
-    data=input("enter the data or link ")
+    qr = qrcode.QRCode()
 
-    image = qrcode.make(data)
+    qr.add_data(data)
+    qr.make(fit=True)
+    image = qr.make_image(fill_color= fill_color, back_color=back_color)
     image.save("qr.png")
 
 qrCodeGenerator()
